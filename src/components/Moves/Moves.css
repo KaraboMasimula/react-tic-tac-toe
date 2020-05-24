@@ -1,0 +1,29 @@
+.moves-list {
+    list-style: none;
+}
+
+.move-item {
+    font-size: 20px;
+    animation: flowIn 0.3s ease-in-out;
+}
+
+.move-blue {
+    font-size: 30px;
+    color: rgb(0, 206, 233);
+}
+
+.move-yellow {
+    font-size: 30px;
+    color: rgb(255, 238, 0);
+}
+
+@keyframes flowIn {
+    0% {
+        font-size: 0px;
+    }
+
+    100% {
+        font-size: 20px;
+    }
+
+}
