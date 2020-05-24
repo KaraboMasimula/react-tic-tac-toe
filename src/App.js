@@ -5,6 +5,7 @@ import Blocks from "./components/Blocks/Blocks";
 import Moves from "./components/Moves/Moves";
 import Modal from "react-modal";
 
+// Custom Syling for the modal
 const customStyles = {
   overlay: {
     position: "fixed",
@@ -29,22 +30,26 @@ const customStyles = {
 };
 
 function App() {
-  let [player, setPlayer] = useState("X");
-  let [previousPlayer, setPrevious] = useState("X");
-  let [moves, setMoves] = useState([]);
-  let [winner, setWinner] = useState(false);
-  let [draw, setDraw] = useState(false);
+  //States
+  let [player, setPlayer] = useState("X"); // State for current player
+  let [previousPlayer, setPrevious] = useState("X"); // State to store previous player
+  let [moves, setMoves] = useState([]); // State to store history of moves
+  let [winner, setWinner] = useState(false); // Bool state for if there's a winner
+  let [draw, setDraw] = useState(false); // Bool state for if there's a draw
 
+  //Audio States
   let [xAudio] = useState(new Audio(`/audio/X.mp3`));
   let [oAudio] = useState(new Audio(`/audio/O.mp3`));
   let [bgAudio] = useState(new Audio(`/audio/bg.mp3`));
   let [winAudio] = useState(new Audio(`/audio/win.mp3`));
   let [drawAudio] = useState(new Audio(`/audio/draw.mp3`));
 
+  // Play Bacground Audio when app starts
   useEffect(() => {
     bgAudio.play();
   });
 
+  // Change Player
   const changePlayer = () => {
     if (player === "X") {
       xAudio.play();
@@ -59,28 +64,33 @@ function App() {
     }
   };
 
+  // Add to list of moves
   const addMoves = (player) => {
     setMoves((currentMoves) => {
       return [...currentMoves, `${player}`];
     });
   };
 
+  // Set Winner
   const changeWinner = () => {
     bgAudio.pause();
     winAudio.play();
     setWinner(true);
   };
 
+  //Set A Draw
   const changeDraw = () => {
     bgAudio.pause();
     drawAudio.play();
     setDraw(true);
   };
 
+  // Close Winner Modal
   const closeWinModal = () => {
     setWinner(false);
   };
 
+  // Close Draw Moda
   const closeDrawModal = () => {
     setDraw(false);
   };

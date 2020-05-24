@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 
 import "./Block.css";
 
 const Block = (props) => {
+  /* On Click Method for button */
   const clicked = () => {
-    if (!props.disabled) props.onClick(props.id);
+    if (!props.disabled) props.onClick(props.id); // If button isn't disabled then emit click with ID
   };
 
   return (

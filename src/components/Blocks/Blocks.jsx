@@ -4,6 +4,7 @@ import "./Blocks.css";
 import { useState } from "react";
 
 const Blocks = (props) => {
+  //Initialise items state for the Blocks
   const [items, updateItem] = useState([
     { id: 1, player: "", disabled: false },
     { id: 2, player: "", disabled: false },
@@ -16,35 +17,41 @@ const Blocks = (props) => {
     { id: 9, player: "", disabled: false },
   ]);
 
+  //Check Winner Everytim state changes
   useEffect(() => {
     checkWinner();
   }, [items]);
 
+  // Handle On Click Method From Block Component
   const handleClick = (id) => {
     const newItems = items.map((item) =>
       item.id === id ? { ...item, player: props.player, disabled: true } : item
-    );
-    updateItem(newItems);
-    props.changePlayer();
+    ); // Create new updated Items
+    updateItem(newItems); // Update Items State
+    props.changePlayer(); // Switch the current player (X-O)
   };
 
+  // Checks If there is a Draw
   const checkDraw = () => {
-    let blocksFilled = 0;
+    let blocksFilled = 0; // int counting number of blocks clicked
 
     for (let i = 0; i < items.length; i++) {
       if (items[i].player !== "") blocksFilled++;
     }
 
-    if (blocksFilled === 9) props.changeDraw();
+    if (blocksFilled === 9) props.changeDraw(); // If all blocks are clicked and there's still no winner then it's a draw
   };
 
+  // Checks If there is a Winner
   const checkWinner = () => {
     let player = "";
 
+    /* Switch current player to opposite - because we trying to compare the previous move */
     if (props.player === "X") player = "O";
 
     if (props.player === "O") player = "X";
 
+    /* Check Every Individual Row to see if there's straight 3 Block row matching */
     if (
       items[0].player === player &&
       items[1].player === player &&

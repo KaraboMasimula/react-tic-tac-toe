@@ -3,6 +3,7 @@ import React from "react";
 import "./Moves.css";
 
 const Moves = (props) => {
+  /* Loop Through Moves */
   return (
     <ul className='moves-list'>
       {props.moves.map((move, i) => {
